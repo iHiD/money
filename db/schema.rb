@@ -13,11 +13,12 @@
 ActiveRecord::Schema.define(:version => 20110318192406) do
 
   create_table "bank_accounts", :force => true do |t|
-    t.string   "name",                                     :null => false
-    t.decimal  "balance",    :precision => 8, :scale => 2, :null => false
-    t.integer  "user_id",                                  :null => false
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.string   "name",                                      :null => false
+    t.text     "description",                               :null => false
+    t.decimal  "balance",     :precision => 8, :scale => 2, :null => false
+    t.integer  "user_id",                                   :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   create_table "users", :force => true do |t|

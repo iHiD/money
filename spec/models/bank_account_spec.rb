@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe BankAccount do
   before(:each) do
-    @bank_account = BankAccount.new(:user_id => 0, 
-                                    :name => "Test Account")
+    @bank_account = BankAccount.new(:user => mock_model("User"),  
+                                    :name => "Test Account",
+                                    :description => "My HSBC Bank Account")
   end
   
   it "should save with default values" do
@@ -12,15 +13,33 @@ describe BankAccount do
   end
   
   it "requires a user" do
+    @bank_account.user = nil
+    @bank_account.save
+    @bank_account.errors.should have_key(:user)
+    
+    @bank_account.user_id = 0
+    @bank_account.save
+    @bank_account.errors.should have_key(:user)
+    
     @bank_account.user_id = nil
+    @bank_account.save
+    @bank_account.errors.should have_key(:user)
+    
+    @bank_account.user = User.new
     @bank_account.save
     @bank_account.errors.should have_key(:user_id)
   end
-  
-  it "requires a name" do
+
+ it "requires a name" do
     @bank_account.name = nil
     @bank_account.save
     @bank_account.errors.should have_key(:name)
+  end
+  
+  it "requires a description" do
+    @bank_account.description = nil
+    @bank_account.save
+    @bank_account.errors.should have_key(:description)
   end
   
   it "has a default balance of 0" do

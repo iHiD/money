@@ -1,19 +1,11 @@
 class BankAccount < ActiveRecord::Base
   
+  include TransactionHandler
+  
   belongs_to :user
+  validates :user, :presence => true
   validates :user_id, :presence => true
   validates :name, :presence => true
-
-  before_save do
-    # Rounds to 2dp and also sets the balance to 0 upon creation
-    self.balance = self.balance.to_f.round(2)
-  end
+  validates :description, :presence => true
   
-  def credit(amount)
-    self.balance += amount.to_f
-  end
-
-  def debit(amount)
-    self.balance -= amount.to_f
-  end
 end
