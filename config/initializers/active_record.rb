@@ -9,4 +9,9 @@ module ActiveRecord
       end
     end
   end
+  class Base
+    def self.belongs_to_account
+      include AccountOwner
+    end
+  end
 end

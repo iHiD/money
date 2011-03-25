@@ -4,7 +4,7 @@
             %h2 Form is invalid
             %ul
                 -@user.errors.full_messages.each do |message|
-                    %li= messsage
+                    %li= message
     %p
         = f.label :name
         %br

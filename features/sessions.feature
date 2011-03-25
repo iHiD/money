@@ -14,6 +14,10 @@ Feature: Sessions
       Then I should be on the overview page
     
     Scenario: I can logout
+      Given I am logged in
+      And I am on the overview page
+      When I press "logout"
+      Then I should be on the login page
     
     
     
