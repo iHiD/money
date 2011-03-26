@@ -25,15 +25,15 @@ describe Account do
     it "must have a user" do
       @account.user = nil
       @account.save
-      @account.errors.should have_key(:user)
+      @account.errors.should have_key(:user_id)
   
       @account.user_id = 0
       @account.save
-      @account.errors.should have_key(:user)
+      @account.errors.should have_key(:user_id)
   
       @account.user_id = nil
       @account.save
-      @account.errors.should have_key(:user)
+      @account.errors.should have_key(:user_id)
   
       @account.user = User.new
       @account.save

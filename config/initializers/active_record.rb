@@ -11,7 +11,10 @@ module ActiveRecord
   end
   class Base
     def self.is_an_account
-      include AccountMethods
+      include ::Accounts::Methods
+    end
+    def self.is_a_transaction
+      include ::Transactions::Methods
     end
   end
 end

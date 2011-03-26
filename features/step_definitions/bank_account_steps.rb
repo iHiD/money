@@ -11,20 +11,20 @@ end
 
 Given /^I have a bank account called "([^"]*)" with a balance of (\d+)$/ do |name, balance|
   @bank_accounts ||= {}
-  @bank_accounts["name"] = BankAccount.create!(:user => @user,
-                                               :name => name,
-                                               :description => "My new bank account called #{name}",
-                                               :balance => balance)
+  @bank_accounts["name"] = Accounts::BankAccount.create!(:user => @user,
+                                                        :name => name,
+                                                        :description => "My new bank account called #{name}",
+                                                        :balance => balance)
 end
 
 ##############
 # When Steps #
 ##############
 When /^I create a bank account with a balance of (\d+)$/ do |balance|
-  @bank_account = BankAccount.create!(:user => @user,
-                                      :name => "New Bank Account",
-                                      :description => "My new bank account",
-                                      :balance => balance)
+  @bank_account = Accounts::BankAccount.create!(:user => @user,
+                                                :name => "New Bank Account",
+                                                :description => "My new bank account",
+                                                :balance => balance)
 end
 
 When /^credit it by (\d+)$/ do |amount|

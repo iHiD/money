@@ -15,7 +15,7 @@ class CreateAccounts < ActiveRecord::Migration
              FOREIGN KEY (user_id) REFERENCES users (id)"
 
     execute "ALTER TABLE accounts
-             ADD CONSTRAINT uk_owner
+             ADD CONSTRAINT uk_account_owner
              UNIQUE (owner_id, owner_type)"
   end
 

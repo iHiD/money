@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110325170927) do
+ActiveRecord::Schema.define(:version => 20110326121927) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",                                      :null => false
@@ -21,14 +21,9 @@ ActiveRecord::Schema.define(:version => 20110325170927) do
     t.string  "owner_type",                                :null => false
   end
 
-  add_index "accounts", ["owner_id", "owner_type"], :name => "uk_owner", :unique => true
+  add_index "accounts", ["owner_id", "owner_type"], :name => "uk_account_owner", :unique => true
 
   create_table "accounts_bank_accounts", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "bank_accounts", :force => true do |t|
     t.string   "sort_code",      :default => "", :null => false
     t.string   "account_number", :default => "", :null => false
     t.datetime "created_at",                     :null => false
@@ -36,11 +31,21 @@ ActiveRecord::Schema.define(:version => 20110325170927) do
   end
 
   create_table "transactions", :force => true do |t|
-    t.integer  "account_id"
-    t.decimal  "amount",     :precision => 8, :scale => 2, :null => false
-    t.integer  "user_id",                                  :null => false
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.integer  "account_id",                                                :null => false
+    t.integer  "user_id",                                                   :null => false
+    t.decimal  "amount",      :precision => 8, :scale => 2,                 :null => false
+    t.integer  "owner_id",                                                  :null => false
+    t.string   "owner_type",                                                :null => false
+    t.text     "description",                               :default => "", :null => false
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+  end
+
+  add_index "transactions", ["owner_id", "owner_type"], :name => "uk_transaction_owner", :unique => true
+
+  create_table "transactions_manuals", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -5,8 +5,7 @@ class Account < ActiveRecord::Base
   
   has_many :transactions
   
-  validates :user, :presence => true
-  validates :user_id, :presence => true
+  validates :user_id, :presence => true, :numericality => {:greater_than => 0}
   validates :name, :presence => true
   validates :description, :presence => true
   validates :owner, :presence => true
