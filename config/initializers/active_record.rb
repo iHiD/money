@@ -10,8 +10,8 @@ module ActiveRecord
     end
   end
   class Base
-    def self.belongs_to_account
-      include AccountOwner
+    def self.is_an_account
+      include AccountMethods
     end
   end
 end

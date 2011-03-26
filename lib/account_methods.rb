@@ -1,7 +1,8 @@
-module AccountOwner
+module AccountMethods
   
   def self.included(klass)
     klass.has_one :account, :as => :owner
+    klass.send(:after_save, :save_account)
   end
   
   def errors
@@ -23,5 +24,11 @@ module AccountOwner
       account || build_account
       account.send("#{attribute}=", val)
     end
+  end
+  
+  protected
+  
+  def save_account
+    account.save
   end
 end

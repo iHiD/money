@@ -1,5 +1,5 @@
 class Accounts::BankAccount < ActiveRecord::Base
-  
-  belongs_to_account
+   
+  is_an_account
   
 end
